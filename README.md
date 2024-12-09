@@ -10,7 +10,8 @@ A mini-project exploring bit trees (a form of binary tree) and their use in tran
 **Acknowledgements**
 
 *
-*
+help from a previous baseline implementation of binary trees in https://github.com/Grinnell-CSC207/lab-tree-traversal-maven.
+in a lab was used
 *
 
 **Instructions for use**

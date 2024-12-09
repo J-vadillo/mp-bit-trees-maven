@@ -13,6 +13,22 @@ public class BitTree {
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
+  /**
+   * The root of the tree.
+   */
+  BitTreeNode<T> root;
+
+  /**
+   * The number of values in the tree.
+   */
+  int size;
+
+    /**
+   * The number of values in the tree.
+   */
+  int bitsize;
+
+  String
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -22,6 +38,10 @@ public class BitTree {
    *
    */
   public BitTree(int n) {
+    bitSize = n;
+    this.root = null;
+    this.size = 0;
+  } // BinaryTree
   } // BitTree(int)
 
   // +---------------+-----------------------------------------------
