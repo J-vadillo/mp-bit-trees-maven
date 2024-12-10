@@ -2,12 +2,15 @@ package edu.grinnell.csc207.util;
 
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Scanner;
+import java.lang.IndexOutOfBoundsException;
+
 
 /**
  * Trees intended to be used in storing mappings between fixed-length 
  * sequences of bits and corresponding values.
  *
- * @author Your Name Here
+ * @author Jana Vadillo
  */
 public class BitTree {
   // +--------+------------------------------------------------------
@@ -16,7 +19,7 @@ public class BitTree {
   /**
    * The root of the tree.
    */
-  BitTreeNode<T> root;
+  BitTreeNode root;
 
   /**
    * The number of values in the tree.
@@ -26,9 +29,8 @@ public class BitTree {
     /**
    * The number of values in the tree.
    */
-  int bitsize;
+  int bitSize;
 
-  String
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -39,14 +41,71 @@ public class BitTree {
    */
   public BitTree(int n) {
     bitSize = n;
-    this.root = null;
-    this.size = 0;
-  } // BinaryTree
+    this.root = new BitTreeNode(null,null);
   } // BitTree(int)
 
   // +---------------+-----------------------------------------------
   // | Local helpers |
   // +---------------+
+
+  private boolean checkBit(char c) throws IndexOutOfBoundsException{
+    if (c == '1'){
+      return true;
+    }else if (c == '0'){
+      return false;
+    }
+    else{
+      throw new IndexOutOfBoundsException();
+    }
+  }
+
+  private BitTreeNode traverse(String bits, boolean set) throws IndexOutOfBoundsException{
+    char[] bitArray = bits.toCharArray();
+    if (!(bitArray.length == this.bitSize)){
+      throw new IndexOutOfBoundsException();
+    }//check to see if the input is a valid length
+
+    BitTreeNode cursor = this.root;
+    for (int i = 0; i <  (bitArray.length); i++){
+      if (checkBit(bitArray[i])){
+        if (cursor.getLeft().equals(null)){
+          if (set){
+            cursor.setLeft(new BitTreeNode(null,null));
+          }
+          else{
+            throw new IndexOutOfBoundsException();
+          }
+
+        }//if path does not exist throw an exception
+        cursor = cursor.getLeft();
+      }else{
+        if (set){
+          cursor.setRight(new BitTreeNode(null,null));
+        }
+        else{
+          throw new IndexOutOfBoundsException();
+        }
+        cursor = cursor.getRight();
+      }
+    }// itterate through until you reach the last open node, which should be a leaf with no value, or an existing value to overwrite
+
+    return cursor;
+
+  }
+
+  private void recursiveDump( PrintWriter pen,BitTreeNode node,String indent){
+    if (node == null) {
+      pen.println(indent + "<>");
+    } else {
+      pen.println(indent + node.value);
+      if ((node.left != null) || (node.right != null)) {
+        recursiveDump(pen, node.left, indent + "  ");
+        recursiveDump(pen, node.right, indent + "  ");
+      } // if has children
+    } // else
+  } // Recursivedump
+
+  
 
   // +---------+-----------------------------------------------------
   // | Methods |
@@ -55,29 +114,35 @@ public class BitTree {
   /**
    *
    */
-  public void set(String bits, String value) {
-    // STUB
+  public void set(String bits, String value) throws IndexOutOfBoundsException {
+    BitTreeNode cursor = traverse(bits, true);
+    cursor.setValue(value);
   } // set(String, String)
 
   /**
    *
    */
   public String get(String bits) {
-    return "";  // STUB
+    BitTreeNode cursor = traverse(bits, false);
+    return cursor.getValue();  
   } // get(String, String)
 
   /**
    *
    */
   public void dump(PrintWriter pen) {
-    // STUB
+    recursiveDump(pen, this.root, "");
   } // dump(PrintWriter)
 
   /**
    *
    */
   public void load(InputStream source) {
-    // STUB
+    Scanner eyes = new Scanner(System.in);
+        while (eyes.hasNext()) {
+            String[] inputs= eyes.nextLine().split(",");
+            this.set(inputs[0], inputs[1]);
+        }//while
   } // load(InputStream)
 
 } // class BitTree

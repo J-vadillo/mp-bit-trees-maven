@@ -51,17 +51,32 @@ class BitTreeNode {
     this.right = r;
   } // BitTreeNode(T, BitTreeNode, BitTreeNode)
 
-  /**
-   * Create a new leaf (a Bit tree node with a value, but no subtrees).
-   *
-   * @param val
-   *   The value to store in the node.
-   */
-  public BitTreeNode(String val) {
-    this.value = val;
-    this.left = null;
-    this.right = null;
+
+
+public BitTreeNode getLeft() {
+    return left;
+}
+
+public BitTreeNode getRight() {
+    return right;
+}
+
+public String getValue() {
+    return value;
+}
+
+
+public void setValue(String str){
+  this.value = str;
+}
+
+public void setLeft(BitTreeNode node){
+  this.left = node;
+}
+
+public void setRight(BitTreeNode node){
+  this.right = node;
+}
 
   
-  } // BitTreeNode(T)
 } // class BitTreeNode<T>
