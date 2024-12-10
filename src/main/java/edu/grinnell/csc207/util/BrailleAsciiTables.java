@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  *
  *
- * @author Your Name Here
+ * @author Jana Vadillo
  * @author Samuel A. Rebelsky
  */
 public class BrailleAsciiTables {
@@ -18,8 +18,7 @@ public class BrailleAsciiTables {
   /**
    * Conversions from ASCII to braille.
    */
-  static final String a2b = 
-      "01000001,100000\n"
+  static final String a2b = "01000001,100000\n"
       + "01000010,110000\n"
       + "01000011,100100\n"
       + "01000100,100110\n"
@@ -76,8 +75,7 @@ public class BrailleAsciiTables {
   /**
    * Conversions from braille to ASCII.
    */
-  static final String b2a =
-      "100000,A\n"
+  static final String b2a = "100000,A\n"
       + "110000,B\n"
       + "100100,C\n"
       + "100110,D\n"
@@ -108,8 +106,7 @@ public class BrailleAsciiTables {
   /**
    * Conversions from braille to unicode.
    */
-  static final String b2u =
-      "000000,2800\n"
+  static final String b2u = "000000,2800\n"
       + "100000,2801\n"
       + "010000,2802\n"
       + "110000,2803\n"
@@ -204,7 +201,7 @@ public class BrailleAsciiTables {
   /**
    *
    */
-  public static String toBraille(char letter) throws RuntimeException{
+  public static String toBraille(char letter) throws RuntimeException {
     if (null == a2bTree) {
       a2bTree = new BitTree(8);
       InputStream a2bStream = new ByteArrayInputStream(a2b.getBytes());
@@ -217,10 +214,10 @@ public class BrailleAsciiTables {
     } // if
 
     String BinaryString = "0" + Integer.toBinaryString(letter);
-    try{
-      String binary = a2bTree.get(BinaryString); 
+    try {
+      String binary = a2bTree.get(BinaryString);
       return (binary);
-    }catch (Exception e){
+    } catch (Exception e) {
       throw new RuntimeException("value does not exist");
     }
   } // toBraille(char)
@@ -241,11 +238,10 @@ public class BrailleAsciiTables {
       } // try/catch
     } // if
 
-
-    try{
-      String ascii = b2aTree.get(bits); 
+    try {
+      String ascii = b2aTree.get(bits);
       return (ascii);
-    }catch (Exception e){
+    } catch (Exception e) {
       throw new RuntimeException("value does not exist");
     }
   } // toAscii(String)
@@ -269,9 +265,6 @@ public class BrailleAsciiTables {
     char[] charachterArray = Character.toChars(charValue);
     String braileString = String.valueOf(charachterArray);
 
-
-
-
-    return braileString; 
+    return braileString;
   } // toUnicode(String)
 } // BrailleAsciiTables
