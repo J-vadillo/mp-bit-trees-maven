@@ -141,8 +141,11 @@ public class BitTreeExperiments {
     pen.println("Experiment 02");
     pen.println("-------------");
     BitTree b2aTree = new BitTree(6);
+
     InputStream b2aStream = new ByteArrayInputStream(b2a.getBytes());
+
     b2aTree.load(b2aStream);
+
     try {
       b2aStream.close();
     } catch (IOException e) {
@@ -172,7 +175,7 @@ public class BitTreeExperiments {
   public static void main(String[] args) {
     PrintWriter pen = new PrintWriter(System.out, true);
 
-    experiment01(pen);
+    // experiment01(pen);
     experiment02(pen);
     
     pen.close();

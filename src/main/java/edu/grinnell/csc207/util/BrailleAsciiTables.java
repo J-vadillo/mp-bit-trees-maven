@@ -204,8 +204,25 @@ public class BrailleAsciiTables {
   /**
    *
    */
-  public static String toBraille(char letter) {
-    return "";  // STUB
+  public static String toBraille(char letter) throws RuntimeException{
+    if (null == a2bTree) {
+      a2bTree = new BitTree(8);
+      InputStream a2bStream = new ByteArrayInputStream(a2b.getBytes());
+      a2bTree.load(a2bStream);
+      try {
+        a2bStream.close();
+      } catch (IOException e) {
+        // We don't care if we can't close the stream.
+      } // try/catch
+    } // if
+
+    String BinaryString = "0" + Integer.toBinaryString(letter);
+    try{
+      String binary = a2bTree.get(BinaryString); 
+      return (binary);
+    }catch (Exception e){
+      throw new RuntimeException("value does not exist");
+    }
   } // toBraille(char)
 
   /**
@@ -223,13 +240,38 @@ public class BrailleAsciiTables {
         // We don't care if we can't close the stream.
       } // try/catch
     } // if
-    return "";  // STUB
+
+
+    try{
+      String ascii = b2aTree.get(bits); 
+      return (ascii);
+    }catch (Exception e){
+      throw new RuntimeException("value does not exist");
+    }
   } // toAscii(String)
 
   /**
    *
    */
   public static String toUnicode(String bits) {
-    return "";  // STUB
+    if (null == b2uTree) {
+      b2uTree = new BitTree(6);
+      InputStream b2uStream = new ByteArrayInputStream(b2u.getBytes());
+      b2uTree.load(b2uStream);
+      try {
+        b2uStream.close();
+      } catch (IOException e) {
+        // We don't care if we can't close the stream.
+      } // try/catch
+    } // if
+
+    int charValue = Integer.parseInt(b2uTree.get(bits), 16);
+    char[] charachterArray = Character.toChars(charValue);
+    String braileString = String.valueOf(charachterArray);
+
+
+
+
+    return braileString; 
   } // toUnicode(String)
 } // BrailleAsciiTables
