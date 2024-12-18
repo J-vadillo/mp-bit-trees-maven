@@ -1,0 +1,1 @@
+The main changes preformed throught this revision where style chagnes as the code was able to succesfully make it through all of the given experiments, and the style from the main function with terminal outputs matches that of the examples given.
