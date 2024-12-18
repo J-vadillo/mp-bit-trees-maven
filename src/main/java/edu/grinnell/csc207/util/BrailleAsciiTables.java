@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.IOException;
 
 /**
- *Contains bit trees of ascii, braile, and traditional charachters to translate between them
+ *Contains bit trees of ascii, braile, and traditional charachters to translate between them.
  * @author Jana Vadillo
  * @author Samuel A. Rebelsky
  */
@@ -198,7 +198,10 @@ public class BrailleAsciiTables {
   // +----------------+
 
   /**
-   *
+   * returns the braille value of a single char.
+   * @param letter the char to translate
+   * @return the braille interpretation
+   * @throws RuntimeException binary string used is invalid.
    */
   public static String toBraille(char letter) throws RuntimeException {
     if (null == a2bTree) {
@@ -212,17 +215,19 @@ public class BrailleAsciiTables {
       } // try/catch
     } // if
 
-    String BinaryString = "0" + Integer.toBinaryString(letter);
+    String binaryString = "0" + Integer.toBinaryString(letter);
     try {
-      String binary = a2bTree.get(BinaryString);
+      String binary = a2bTree.get(binaryString);
       return (binary);
     } catch (Exception e) {
       throw new RuntimeException("value does not exist");
-    }
+    } // try to get the value stored in the binary tree witht he string used.
   } // toBraille(char)
 
   /**
-   *
+   * makes a string to ascii.
+   * @param bits the bitwise string storing braille.
+   * @return the ascii string
    */
   public static String toAscii(String bits) {
     // Make sure we've loaded the braille-to-ASCII tree.
@@ -242,11 +247,13 @@ public class BrailleAsciiTables {
       return (ascii);
     } catch (Exception e) {
       throw new RuntimeException("value does not exist");
-    }
+    } //tru catch
   } // toAscii(String)
 
   /**
-   *
+   * makes a string in binary into unicode.
+   * @param bits the binary string
+   * @return the unicode string.
    */
   public static String toUnicode(String bits) {
     if (null == b2uTree) {
