@@ -5,8 +5,7 @@ import java.io.InputStream;
 import java.io.IOException;
 
 /**
- *
- *
+ *Contains bit trees of ascii, braile, and traditional charachters to translate between them
  * @author Jana Vadillo
  * @author Samuel A. Rebelsky
  */

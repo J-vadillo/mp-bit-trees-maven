@@ -4,7 +4,8 @@ import java.io.PrintWriter;
 import edu.grinnell.csc207.util.BrailleAsciiTables;
 
 /**
- *
+ * the main workhorse of the class, takes in a parameter for output type and input and returns the input in that style.
+ * @author Jana Vadillo
  */
 public class BrailleASCII {
   // +------+--------------------------------------------------------

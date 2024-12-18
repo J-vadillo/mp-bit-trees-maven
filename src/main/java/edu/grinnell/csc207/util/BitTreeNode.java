@@ -4,7 +4,7 @@ package edu.grinnell.csc207.util;
 /**
  * Nodes in a Bit tree.
  *
- * @author Samuel A. Rebelsky (original)
+ * @author Samuel A. Rebelsky (original
 
  * @param <T>
  *   The type of value stored in nodes.
